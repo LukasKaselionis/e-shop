@@ -62,6 +62,17 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function() {
                 Route::put('{role}', 'RoleController@update')
                     ->name('update');
             });
+
+            Route::prefix('category')->name('category.')->group(function() {
+                Route::get('/', 'CategoryController@index')
+                    ->name('index');
+                Route::get('/create', 'CategoryController@create')
+                    ->name('create');
+                Route::get('{category}/edit', 'CategoryController@edit')
+                    ->name('edit');
+                Route::put('{category}', 'CategoryController@update')
+                    ->name('update');
+            });
         });
     });
 });
