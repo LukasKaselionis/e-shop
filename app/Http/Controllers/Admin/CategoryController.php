@@ -1,31 +1,58 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
+use App\Http\Requests\CategoryStoreRequest;
+use App\Services\CategoryService;
+use Exception;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 
+/**
+ * Class CategoryController
+ * @package App\Http\Controllers\Admin
+ */
 class CategoryController extends Controller
 {
     /**
+     * @var CategoryService
+     */
+    private $categoryService;
+
+    /**
+     * CategoryController constructor.
+     * @param CategoryService $categoryService
+     */
+    public function __construct(CategoryService $categoryService)
+    {
+        $this->categoryService = $categoryService;
+    }
+
+    /**
      * Display a listing of the resource.
      *
-     * @return void
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
-        return view('admin.category.list');
+        $categoriesPaginated = $this->categoryService->getPaginatedData();
+        return view('admin.category.list', [
+            'categories' => $categoriesPaginated,
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
         return view('admin.category.create');
     }
@@ -33,56 +60,57 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CategoryStoreRequest $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CategoryStoreRequest $request): RedirectResponse
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        //
+        Category::create([
+            'title' => $request->getTitle(),
+        ]);
+        return redirect()->route('admin.category.index')
+            ->with('status', 'Category created successfully!');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
+     * @param Category $category
+     * @return View
      */
-    public function edit(Category $category)
+    public function edit(Category $category): View
     {
-        return view('admin.category.edit');
+        return view('admin.category.edit', ['category' => $category]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
+     * @param CategoryStoreRequest $request
+     * @param Category $category
+     * @return RedirectResponse
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryStoreRequest $request, Category $category): RedirectResponse
     {
-        //
+        $category->title = $request->getTitle();
+        $category->save();
+
+        return redirect()->route('admin.category.index')
+            ->with('status', 'Category updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
+     * @param Category $category
+     * @return RedirectResponse
+     * @throws Exception
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category): RedirectResponse
     {
-        //
+        $category->delete();
+
+        return redirect()->route('admin.category.index')
+            ->with('status', 'Category deleted!');
     }
 }
