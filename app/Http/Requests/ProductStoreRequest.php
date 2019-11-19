@@ -1,11 +1,15 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class ProductStoreRequest
+ * @package App\Http\Requests
+ */
 class ProductStoreRequest extends FormRequest
 {
     /**
@@ -27,8 +31,32 @@ class ProductStoreRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:5|max:191',
-            'price' => 'required|float',
-            'description' => 'required|text|min:10'
+            'price' => 'required|numeric',
+            'description' => 'required|string|min:10'
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return strip_tags($this->input('name'));
+    }
+
+    /**
+     * @return float
+     */
+    public function getPrice(): float
+    {
+        return floatval($this->input('price'));
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return strip_tags($this->input('description'));
     }
 }
