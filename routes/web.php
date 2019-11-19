@@ -64,6 +64,7 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
             });
 
             Route::resource('category', 'CategoryController')->except(['show']);
+            Route::resource('product', 'ProductController');
         });
     });
 });
