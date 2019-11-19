@@ -40,6 +40,11 @@
                                         {{ __('Roles') }}
                                     </a>
                                 @endif
+                                @if (can_access('admin.category.index'))
+                                    <a class="dropdown-item" href="{{ route('admin.category.index') }}">
+                                        {{ __('Category') }}
+                                    </a>
+                                @endif
 
                             </div>
                         </li>
