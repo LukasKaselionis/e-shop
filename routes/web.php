@@ -15,7 +15,7 @@ use App\Http\Middleware\RouteAccessMiddleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function() {
+Route::get('/', function () {
     return view('welcome');
 });
 
@@ -25,8 +25,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // ADMIN ROUTES
 
-Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function() {
-    Route::namespace('Auth')->group(function() {
+Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
+    Route::namespace('Auth')->group(function () {
         //Login Routes
         Route::get('login', 'LoginController@showLoginForm')->name('login');
         Route::post('login', 'LoginController@login');
@@ -41,11 +41,11 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function() {
         Route::post('password/reset', 'ResetPasswordController@reset')->name('password.update');
     });
 
-    Route::middleware('auth:admin')->group(function() {
+    Route::middleware('auth:admin')->group(function () {
         Route::get('/', 'HomeController@index')->name('home');
 
-        Route::middleware(RouteAccessMiddleware::ALIAS)->group(function() {
-            Route::prefix('administrator')->name('administrator.')->group(function() {
+        Route::middleware(RouteAccessMiddleware::ALIAS)->group(function () {
+            Route::prefix('administrator')->name('administrator.')->group(function () {
                 Route::get('/', 'AdminController@index')
                     ->name('index');
                 Route::get('{admin}/edit', 'AdminController@edit')
@@ -54,7 +54,7 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function() {
                     ->name('update');
             });
 
-            Route::prefix('role')->name('role.')->group(function() {
+            Route::prefix('role')->name('role.')->group(function () {
                 Route::get('/', 'RoleController@index')
                     ->name('index');
                 Route::get('{role}/edit', 'RoleController@edit')
@@ -63,16 +63,7 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function() {
                     ->name('update');
             });
 
-            Route::prefix('category')->name('category.')->group(function() {
-                Route::get('/', 'CategoryController@index')
-                    ->name('index');
-                Route::get('/create', 'CategoryController@create')
-                    ->name('create');
-                Route::get('{category}/edit', 'CategoryController@edit')
-                    ->name('edit');
-                Route::put('{category}', 'CategoryController@update')
-                    ->name('update');
-            });
+            Route::resource('category', 'CategoryController')->except(['show']);
         });
     });
 });
