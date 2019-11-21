@@ -63,15 +63,19 @@ class ProductService
      * @param string $name
      * @param float $price
      * @param string $description
+     * @param array $categoriesIds
      * @return int
      */
-    public function updateById(int $id, string $name, float $price, string $description): int
+    public function updateById(int $id, string $name, float $price, string $description, array $categoriesIds = []): int
     {
+        $product = $this->productRepository->makeQuery()->findOrFail($id);
         $updated = $this->productRepository->update([
             'name' => $name,
             'price' => $price,
             'description' => $description
         ], $id);
+
+        $this->syncCategories($product, $categoriesIds);
 
         return $updated;
     }

@@ -118,7 +118,8 @@ class ProductController extends Controller
             $id,
             $request->getName(),
             $request->getPrice(),
-            $request->getDescription()
+            $request->getDescription(),
+            $request->getCategoriesIds()
         );
 
         return redirect()->route('admin.product.index')
