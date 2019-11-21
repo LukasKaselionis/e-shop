@@ -32,7 +32,8 @@ class ProductStoreRequest extends FormRequest
         return [
             'name' => 'required|string|min:5|max:191',
             'price' => 'required|numeric',
-            'description' => 'required|string|min:10'
+            'description' => 'required|string|min:10',
+            'categories' => 'nullable|array'
         ];
     }
 
@@ -58,5 +59,13 @@ class ProductStoreRequest extends FormRequest
     public function getDescription(): string
     {
         return strip_tags($this->input('description'));
+    }
+
+    /**
+     * @return array
+     */
+    public function getCategoriesIds(): array
+    {
+        return $this->input('categories', []);
     }
 }

@@ -26,7 +26,7 @@
                             </div>
                         @endif
 
-                        <form action="{{ route('admin.product.store') }}" method="post">
+                        <form action="{{ route('admin.product.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group">
@@ -36,7 +36,8 @@
 
                             <div class="form-group">
                                 <label for="price">{{ __('Price') }}</label>
-                                <input type="number" id="price" name="price" class="form-control" step="0.01" value="{{ old('price') }}">
+                                <input type="number" id="price" name="price" class="form-control" step="0.01"
+                                       value="{{ old('price') }}">
                             </div>
 
                             <div class="form-group">
@@ -45,7 +46,17 @@
                             </div>
 
                             <div class="form-group">
-                                <input class="btn btn-outline-primary" type="submit" name="submit" value="{{ __('Save') }}">
+                                <label for="categories">{{ __('Categories') }}</label>
+                                @foreach($categories as $catId => $catName)
+                                    <input id="categories" class="form-check" type="checkbox"
+                                           name="categories[]" value="{{ $catId }}"
+                                            {{ in_array($catId, old('categories', [])) ? 'checked="checked"' : '' }}> {{ $catName }}
+                                @endforeach
+
+                            </div>
+                            <div class="form-group">
+                                <input class="btn btn-outline-primary" type="submit" name="submit"
+                                       value="{{ __('Save') }}">
                             </div>
 
                         </form>

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Http\Requests\ProductStoreRequest;
 use App\Product;
 use App\Services\ProductService;
@@ -47,7 +48,12 @@ class ProductController extends Controller
      */
     public function create(): View
     {
-        return view('admin.product.create');
+        $categories = Category::orderBy('title')
+            ->pluck('title', 'id');
+
+        return view('admin.product.create', [
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -61,7 +67,8 @@ class ProductController extends Controller
         $this->productService->createNewProduct(
             $request->getName(),
             $request->getPrice(),
-            $request->getDescription()
+            $request->getDescription(),
+            $request->getCategoriesIds()
         );
 
         return redirect()->route('admin.product.index')
@@ -76,7 +83,9 @@ class ProductController extends Controller
      */
     public function show(Product $product): View
     {
-        return view('admin.product.show', ['product' => $product]);
+        return view('admin.product.show', [
+            'product' => $product
+        ]);
     }
 
     /**
@@ -87,7 +96,13 @@ class ProductController extends Controller
      */
     public function edit(Product $product): View
     {
-        return view('admin.product.edit', ['product' => $product]);
+        $categories = Category::orderBy('title')
+            ->pluck('title', 'id');
+
+        return view('admin.product.edit', [
+            'product' => $product,
+            'categories' => $categories
+        ]);
     }
 
     /**
