@@ -12,6 +12,10 @@
                         <h5 class="pb-1">{{ $product->name }}</h5>
                         <h5 class="pb-1">{{ $product->price }}</h5>
                         <h5 class="pb-1">{{ $product->description }}</h5>
+                        @foreach($product->categories as $category)
+                            <h5 class="pb-1">{{ $category->id }}</h5>
+                        @endforeach
+                        <h5 class="pb-1">{{ $product->description }}</h5>
                         <h5 class="pb-1">{{ $product->created_at }}</h5>
                         <h5 class="pb-1">{{ $product->updated_at }}</h5>
                     </div>

@@ -83,6 +83,7 @@ class ProductController extends Controller
      */
     public function show(Product $product): View
     {
+        $product->load('categories');
         return view('admin.product.show', [
             'product' => $product
         ]);
