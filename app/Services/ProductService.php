@@ -41,16 +41,18 @@ class ProductService
      * @param string $name
      * @param float $price
      * @param string $description
+     * @param string $slug
      * @param array $categoriesIds
      * @return Product|Model
      */
-    public function createNewProduct(string $name, float $price, string $description, array $categoriesIds = []): Product
+    public function createNewProduct(string $name, float $price, string $description, string $slug, array $categoriesIds = []): Product
     {
         /** @var Product $product */
         $product = $this->productRepository->create([
             'name' => $name,
             'price' => $price,
-            'description' => $description
+            'description' => $description,
+            'slug' => $slug
         ]);
 
         $this->syncCategories($product, $categoriesIds);
@@ -63,16 +65,18 @@ class ProductService
      * @param string $name
      * @param float $price
      * @param string $description
+     * @param string $slug
      * @param array $categoriesIds
      * @return int
      */
-    public function updateById(int $id, string $name, float $price, string $description, array $categoriesIds = []): int
+    public function updateById(int $id, string $name, float $price, string $description, string $slug, array $categoriesIds = []): int
     {
         $product = $this->productRepository->makeQuery()->findOrFail($id);
         $updated = $this->productRepository->update([
             'name' => $name,
             'price' => $price,
-            'description' => $description
+            'description' => $description,
+            'slug' => $slug
         ], $id);
 
         $this->syncCategories($product, $categoriesIds);

@@ -32,6 +32,12 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="slug">{{ __('Slug') }}</label>
+                                <input type="text" id="slug" name="slug" class="form-control"
+                                       value="{{ old('slug', $product->slug) }}">
+                            </div>
+
+                            <div class="form-group">
                                 <label for="categories">{{ __('Categories') }}</label>
                                 @foreach($categories as $catId => $catName)
                                     <input id="categories" class="form-check" type="checkbox"

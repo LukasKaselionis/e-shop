@@ -12,6 +12,10 @@ use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 
+/**
+ * Class ProductController
+ * @package App\Http\Controllers\Admin
+ */
 class ProductController extends Controller
 {
     /**
@@ -68,6 +72,7 @@ class ProductController extends Controller
             $request->getName(),
             $request->getPrice(),
             $request->getDescription(),
+            $request->getSlug(),
             $request->getCategoriesIds()
         );
 
@@ -120,6 +125,7 @@ class ProductController extends Controller
             $request->getName(),
             $request->getPrice(),
             $request->getDescription(),
+            $request->getSlug(),
             $request->getCategoriesIds()
         );
 

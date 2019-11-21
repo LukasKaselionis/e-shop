@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 /**
  * Class ProductStoreRequest
@@ -67,5 +68,21 @@ class ProductStoreRequest extends FormRequest
     public function getCategoriesIds(): array
     {
         return $this->input('categories', []);
+    }
+
+    public function getSlug(): string
+    {
+        $slugUnprepared = $this->input('slug');
+
+        if (is_string($slugUnprepared)) {
+            $slugUnprepared = trim($slugUnprepared);
+        }
+
+        if (empty($slugUnprepared)) {
+            $slugUnprepared = $this->getName();
+        }
+
+        $slug = Str::slug($slugUnprepared);
+        return $slug;
     }
 }
