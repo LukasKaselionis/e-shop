@@ -41,15 +41,19 @@ class ProductService
      * @param string $name
      * @param float $price
      * @param string $description
+     * @param array $categoriesIds
      * @return Product|Model
      */
-    public function createNewProduct(string $name, float $price, string $description): Product
+    public function createNewProduct(string $name, float $price, string $description, array $categoriesIds = []): Product
     {
+        /** @var Product $product */
         $product = $this->productRepository->create([
             'name' => $name,
             'price' => $price,
             'description' => $description
         ]);
+
+        $this->syncCategories($product, $categoriesIds);
 
         return $product;
     }
@@ -78,5 +82,14 @@ class ProductService
     public function destroyById(int $id)
     {
         $this->productRepository->delete($id);
+    }
+
+    /**
+     * @param Product $product
+     * @param array $categoriesIds
+     */
+    private function syncCategories(Product &$product, array $categoriesIds = []): void
+    {
+        $product->categories()->sync($categoriesIds);
     }
 }
