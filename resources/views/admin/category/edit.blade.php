@@ -19,6 +19,12 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="slug">{{ __('Slug') }}</label>
+                                <input type="text" id="slug" name="slug" class="form-control"
+                                       value="{{ old('slug', $category->slug) }}">
+                            </div>
+
+                            <div class="form-group">
                                 <input type="submit" name="submit" class="btn btn-sm btn-outline-primary"
                                        value="{{ __('Save') }}">
                             </div>

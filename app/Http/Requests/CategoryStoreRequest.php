@@ -5,6 +5,7 @@ declare(strict_type=1);
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 /**
  * Class CategoryStoreRequest
@@ -45,5 +46,24 @@ class CategoryStoreRequest extends FormRequest
     public function getTitle(): string
     {
         return $this->input('title');
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        $slugUnprepared = $this->input('slug');
+
+        if (is_string($slugUnprepared)) {
+            $slugUnprepared = trim($slugUnprepared);
+        }
+
+        if (empty($slugUnprepared)) {
+            $slugUnprepared = $this->getTitle();
+        }
+
+        $slug = Str::slug($slugUnprepared);
+        return $slug;
     }
 }
