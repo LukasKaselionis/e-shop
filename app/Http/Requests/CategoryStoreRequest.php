@@ -4,6 +4,8 @@ declare(strict_type=1);
 
 namespace App\Http\Requests;
 
+use App\Category;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 
@@ -38,6 +40,44 @@ class CategoryStoreRequest extends FormRequest
                 'max:191',
             ],
         ];
+    }
+
+    /**
+     * @return Validator
+     */
+    protected function getValidatorInstance()
+    {
+        $validator = parent::getValidatorInstance();
+        $validator->after(function(Validator $validator) {
+            $category = $this->route()->parameter('category');
+            $categoryId = $category ? (int)$category->id : null;
+            if (
+                ($this->isMethod('put') || $this->isMethod('post')) &&
+                $this->slugExists($categoryId)
+            ) {
+                $validator->errors()
+                    ->add('slug', 'This slug already exists');
+            }
+            return;
+        });
+        return $validator;
+    }
+
+    /**
+     * @param int|null $categoryId
+     * @return bool
+     */
+    private function slugExists(?int $categoryId = null): bool
+    {
+        $query = Category::query()->where('slug', '=', $this->getSlug());
+        if ($categoryId !== null) {
+            $query->where('id', '!=', $categoryId);
+        }
+        $category = $query->first();
+        if (!empty($category)) {
+            return true;
+        }
+        return false;
     }
 
     /**

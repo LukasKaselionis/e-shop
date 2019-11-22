@@ -9,9 +9,7 @@ use App\Http\Requests\CategoryStoreRequest;
 use App\Services\CategoryService;
 use Exception;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 /**
@@ -94,6 +92,7 @@ class CategoryController extends Controller
     public function update(CategoryStoreRequest $request, Category $category): RedirectResponse
     {
         $category->title = $request->getTitle();
+        $category->slug = $request->getSlug();
         $category->save();
 
         return redirect()->route('admin.category.index')
