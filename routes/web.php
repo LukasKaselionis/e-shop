@@ -15,13 +15,14 @@ use App\Http\Middleware\RouteAccessMiddleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// GUEST ROUTES
+
+Route::get('/', 'Front\HomeController@index')->name('home');
+Route::post('cart/add', 'Front\CartController@add')->name('cart.add');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'Front\HomeController@index')->name('home');
 
 // ADMIN ROUTES
 
