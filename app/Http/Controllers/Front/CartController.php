@@ -20,7 +20,6 @@ class CartController extends Controller
      */
     public function add(Request $request)
     {
-        dd(session()->get('cart'));
         $productId = $request->input('productId');
         $productPrice = $request->input('productPrice');
         $productName = $request->input('productName');
