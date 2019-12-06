@@ -10,6 +10,11 @@
                         <a href="{{ route('admin.category.create') }}" class="btn btn-sm btn-primary">+</a>
                     </div>
                     <div class="card-body">
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
 
                         <table class="table">
                             <thead>
@@ -33,7 +38,7 @@
                                         <a class="btn btn-sm btn-outline-primary"
                                            href="{{ route('admin.category.edit', ['category' => $category->id]) }}">Edit</a>
                                         <form action="{{ route('admin.category.destroy', ['category' => $category->id]) }}"
-                                              method="post">
+                                              method="post" class="d-inline">
                                             @csrf
                                             @method('delete')
                                             <input type="submit" onclick="return confirm('Are you sure?');"

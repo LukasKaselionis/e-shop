@@ -52,7 +52,7 @@
                                             @csrf
                                             @method('delete')
                                             <input type="submit" onclick="return confirm('Are you sure?');"
-                                                   class="btn btn-sm btn-outline-danger" name="deleteArticle"
+                                                   class="btn btn-sm btn-outline-danger" name="deleteProduct"
                                                    value="Delete">
                                         </form>
                                     </td>
@@ -60,7 +60,7 @@
 
                             @endforeach
 
-
+                            <tfoot>{{ $products->links() }}</tfoot>
                         </table>
                     </div>
                 </div>

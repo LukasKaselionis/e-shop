@@ -23,6 +23,12 @@
                     </li>
                 @else
                     @if (can_access_any(['admin.administrator.index', 'admin.role.index']))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.category.index') }}">{{ __('Categories') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.product.index') }}">{{ __('Products') }}</a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -40,17 +46,6 @@
                                         {{ __('Roles') }}
                                     </a>
                                 @endif
-                                @if (can_access('admin.category.index'))
-                                    <a class="dropdown-item" href="{{ route('admin.category.index') }}">
-                                        {{ __('Categories') }}
-                                    </a>
-                                @endif
-                                @if (can_access('admin.product.index'))
-                                    <a class="dropdown-item" href="{{ route('admin.product.index') }}">
-                                        {{ __('Products') }}
-                                    </a>
-                                @endif
-
                             </div>
                         </li>
                     @endif
