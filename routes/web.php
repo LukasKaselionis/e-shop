@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'Front\HomeController@index')->name('home');
 Route::post('cart/add', 'Front\CartController@add')->name('cart.add');
+Route::get('cart', 'Front\CartController@cart')->name('cart');
+Route::get('cart/{id}', 'Front\CartController@destroy')->name('cart.item.destroy');
 
 Auth::routes();
 

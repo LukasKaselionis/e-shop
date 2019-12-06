@@ -21,7 +21,6 @@
     <script>
         function addToCart(id, name, price) {
             let token = '{{ csrf_token() }}';
-            console.log(name);
             $.ajax({
                 method: 'POST',
                 url: '{{ route('cart.add') }}',

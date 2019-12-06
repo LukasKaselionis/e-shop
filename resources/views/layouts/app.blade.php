@@ -44,7 +44,7 @@
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('cart') }}">
                             <i class="material-icons">shopping_cart</i>
                             @if(!empty(session()->get('cart'))) {{ count(session()->get('cart')) }} items @else Cart @endif
                         </a>
