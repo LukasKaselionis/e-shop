@@ -4,7 +4,7 @@
     <div class="container">
         @if(!empty($cart))
             @foreach($cart as $item)
-                @if($item['quantity'] >= 0)
+                @if($item['quantity'] > 0)
                     <div class="card col-sm-6 col-md-4">
                         <p class="card-title">Name: {{$item['name']}}</p>
                         <p>Quantity: {{ $item['quantity'] }}</p>

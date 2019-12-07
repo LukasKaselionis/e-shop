@@ -54,14 +54,18 @@ class CartController extends Controller
      */
     public function destroy($productId): RedirectResponse
     {
-        if (session('cart')[$productId]['quantity'] >= 0) {
-            $selectCartQty = (int)session('cart')[$productId]['quantity'];
-//            dd($selectCartQty);
-            if (session()->decrement('cart.' . $productId . '.quantity') == 0) {
-                session()->flush();
-                return redirect()->route('cart');
-            };
+        if (session()->exists('cart.' . $productId . '.quantity') > 0) {
+            session()->decrement('cart.' . $productId . '.quantity');
         }
+
+        $cartQty = session()->get('cart');
+
+        foreach ($cartQty as $item) {
+            if ($item['quantity'] == 0) {
+                session()->pull('cart.' . $productId, $cartQty[$productId]);
+            }
+        }
+        return redirect()->route('cart');
     }
 
 }
