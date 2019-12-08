@@ -55,6 +55,15 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="cover">{{ __('Cover') }}</label>
+                                @if ($product->cover)
+                                    <img width="50" src="{{ asset('storage/'.$product->cover) }}">
+                                    <input type="checkbox" name="deleteCover" value="1"> Delete cover
+                                @endif
+                                <input class="form-control-file" type="file" id="cover" name="cover" value="">
+                            </div>
+
+                            <div class="form-group">
                                 <label for="categories">{{ __('Categories') }}</label>
                                 @foreach($categories as $catId => $catName)
                                     <input id="categories" class="form-check" type="checkbox"

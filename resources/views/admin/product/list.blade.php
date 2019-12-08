@@ -20,7 +20,8 @@
                         <table class="table">
                             <tr>
                                 <th>ID</th>
-                                <th>Title</th>
+                                <th>Name</th>
+                                <td>Cover</td>
                                 <th>Price</th>
                                 <th>Description</th>
                                 <th>Created</th>
@@ -33,6 +34,12 @@
                                 <tr>
                                     <td>{{ $product->id }}</td>
                                     <td>{{ $product->name }}</td>
+                                    <td>
+                                        @if ($product->cover)
+                                            <img width="50" src="{{ asset('storage/'.$product->cover) }}"
+                                                 alt="{{ $product->title }}">
+                                        @endif
+                                    </td>
                                     <td>{{ $product->price }}</td>
                                     <td>{{ $product->description }}</td>
                                     <td>{{ $product->created_at }}</td>

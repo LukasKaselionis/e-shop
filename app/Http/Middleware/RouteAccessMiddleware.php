@@ -46,7 +46,6 @@ class RouteAccessMiddleware
             return redirect()->route('admin.home')
                 ->with('danger', 'You have not access to this route!');
         }
-        if ($this->shouldBlockAccess())
 
         return $next($request);
     }

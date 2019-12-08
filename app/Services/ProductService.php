@@ -8,6 +8,8 @@ use App\Product;
 use App\Repositories\ProductRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class ProductService
@@ -15,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ProductService
 {
+    const FILE_DIR = 'product';
     /**
      * @var ProductRepository
      */
@@ -43,9 +46,17 @@ class ProductService
      * @param string $description
      * @param string $slug
      * @param array $categoriesIds
+     * @param UploadedFile|null $cover
      * @return Product|Model
      */
-    public function createNewProduct(string $name, float $price, string $description, string $slug, array $categoriesIds = []): Product
+    public function createNewProduct(
+        string $name,
+        float $price,
+        string $description,
+        string $slug,
+        array $categoriesIds = [],
+        ?UploadedFile $cover = null
+    ): Product
     {
         /** @var Product $product */
         $product = $this->productRepository->create([
@@ -57,6 +68,12 @@ class ProductService
 
         $this->syncCategories($product, $categoriesIds);
 
+        if ($cover !== null) {
+            $uploadedFile = $this->uploadImage($cover, $product->id);
+            $product->cover = $uploadedFile;
+            $product->save();
+        }
+
         return $product;
     }
 
@@ -67,16 +84,38 @@ class ProductService
      * @param string $description
      * @param string $slug
      * @param array $categoriesIds
+     * @param int|null $deleteCover
+     * @param UploadedFile|null $cover
      * @return int
      */
-    public function updateById(int $id, string $name, float $price, string $description, string $slug, array $categoriesIds = []): int
+    public function updateById(
+        int $id,
+        string $name,
+        float $price,
+        string $description,
+        string $slug,
+        array $categoriesIds = [],
+        ?int $deleteCover = null,
+        ?UploadedFile $cover = null
+    ): int
     {
         $product = $this->productRepository->makeQuery()->findOrFail($id);
+
+        $uploadedFile = $product->cover;
+        if ($deleteCover !== null) {
+            Storage::delete($product->cover);
+            $uploadedFile = null;
+        }
+        if ($cover !== null) {
+            $uploadedFile = $this->uploadImage($cover, $product->id);
+        }
+
         $updated = $this->productRepository->update([
             'name' => $name,
             'price' => $price,
             'description' => $description,
-            'slug' => $slug
+            'slug' => $slug,
+            'cover' => $uploadedFile
         ], $id);
 
         $this->syncCategories($product, $categoriesIds);
@@ -90,6 +129,19 @@ class ProductService
     public function destroyById(int $id)
     {
         $this->productRepository->delete($id);
+    }
+
+    /**
+     * @param UploadedFile|null $image
+     * @param int $productId
+     * @return string|null
+     */
+    private function uploadImage(?UploadedFile $image, int $productId): ?string
+    {
+        if ($image === null) {
+            return null;
+        }
+        return $image->store(self::FILE_DIR . '/' . $productId);
     }
 
     /**

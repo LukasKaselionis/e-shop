@@ -7,6 +7,7 @@ namespace App\Http\Requests;
 use App\Product;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 
 /**
@@ -36,7 +37,8 @@ class ProductStoreRequest extends FormRequest
             'name' => 'required|string|min:5|max:191',
             'price' => 'required|numeric',
             'description' => 'required|string|min:10',
-            'categories' => 'nullable|array'
+            'categories' => 'nullable|array',
+            'cover' => 'nullable|image'
         ];
     }
 
@@ -46,7 +48,7 @@ class ProductStoreRequest extends FormRequest
     protected function getValidatorInstance()
     {
         $validator = parent::getValidatorInstance();
-        $validator->after(function(Validator $validator) {
+        $validator->after(function (Validator $validator) {
             $product = $this->route()->parameter('products');
             $productId = $product ? (int)$product->id : null;
             if (
@@ -128,5 +130,25 @@ class ProductStoreRequest extends FormRequest
 
         $slug = Str::slug($slugUnprepared);
         return $slug;
+    }
+
+    /**
+     * @return UploadedFile|null
+     */
+    public function getCover(): ?UploadedFile
+    {
+        return $this->file('cover');
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getDeleteCoverOption(): ?int
+    {
+        $deleteCover = $this->input('deleteCover');
+        if ($deleteCover === null) {
+            return null;
+        }
+        return (int)$deleteCover;
     }
 }
