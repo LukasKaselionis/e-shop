@@ -9,7 +9,7 @@
                     <h5>{{ $product->price }}</h5>
                     <p>{{ $product->description }}</p>
                     <a onclick="addToCart({{ $product->id }}, '{{ $product->name }}', {{ $product->price }});">
-                        <button>Add</button>
+                        <button class="btn btn-success btn-block">Add</button>
                     </a>
                 </div>
             @endforeach
