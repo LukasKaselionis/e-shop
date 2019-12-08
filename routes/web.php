@@ -26,6 +26,9 @@ Auth::routes();
 
 Route::get('/home', 'Front\HomeController@index')->name('home');
 
+// USER ROUTES
+Route::get('/checkout/delivery', 'Front\DeliveryController@index')->name('checkout.delivery');
+
 // ADMIN ROUTES
 
 Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
