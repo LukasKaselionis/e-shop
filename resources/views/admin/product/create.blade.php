@@ -46,6 +46,11 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="cover">{{ __('Cover') }}</label>
+                                <input class="form-control-file" type="file" id="cover" name="cover" value="">
+                            </div>
+
+                            <div class="form-group">
                                 <label for="categories">{{ __('Categories') }}</label>
                                 @foreach($categories as $catId => $catName)
                                     <input id="categories" class="form-check" type="checkbox"

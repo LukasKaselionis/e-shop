@@ -73,7 +73,8 @@ class ProductController extends Controller
             $request->getPrice(),
             $request->getDescription(),
             $request->getSlug(),
-            $request->getCategoriesIds()
+            $request->getCategoriesIds(),
+            $request->getCover()
         );
 
         return redirect()->route('admin.product.index')
@@ -126,7 +127,8 @@ class ProductController extends Controller
             $request->getPrice(),
             $request->getDescription(),
             $request->getSlug(),
-            $request->getCategoriesIds()
+            $request->getCategoriesIds(),
+            $request->getCover()
         );
 
         return redirect()->route('admin.product.index')
