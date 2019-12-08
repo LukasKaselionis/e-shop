@@ -6,7 +6,12 @@
             @foreach($cart as $item)
                 @if($item['quantity'] > 0)
                     <div class="card col-sm-6 col-md-4">
-                        <p class="card-title">Name: {{$item['name']}}</p>
+                        <h5>Product name: </h5>
+                        <p>{{$item['name']}}</p>
+                        @if ($item['cover'])
+                            <img width="150" height="100" src="{{ asset('storage/'.$item['cover']) }}"
+                                 alt="{{ $item['name'] }}">
+                        @endif
                         <p>Quantity: {{ $item['quantity'] }}</p>
                         <p>Price: {{ $item['price'] }}</p>
                         <a href="{{ route('cart.item.destroy', $item['product_id']) }}">

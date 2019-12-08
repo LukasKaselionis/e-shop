@@ -36,9 +36,11 @@ class CartController extends Controller
         $productId = $request->input('productId');
         $productPrice = $request->input('productPrice');
         $productName = $request->input('productName');
+        $productCover = $request->input('productCover');
         if (!session()->exists('cart.' . $productId)) {
             session()->put('cart.' . $productId, [
                 'product_id' => $productId,
+                'cover' => $productCover,
                 'quantity' => 0,
                 'name' => $productName,
                 'price' => $productPrice
