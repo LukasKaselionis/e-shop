@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             @foreach($products as $product)
-                <div class="card col-sm-6 col-md-4">
+                <div class="card col-sm-4 col-md-3 col-lg-3 p-4 m-2">
                     <h5>Product name: </h5>
                         <p>{{ $product->name }}</p>
                     @if ($product->cover)

@@ -128,6 +128,7 @@ class ProductController extends Controller
             $request->getDescription(),
             $request->getSlug(),
             $request->getCategoriesIds(),
+            $request->getDeleteCoverOption(),
             $request->getCover()
         );
 
