@@ -40,12 +40,17 @@
                     productPrice: price,
                     productCover: cover
                 },
-                success: function () {
-
+                success: function (data) {
+                    console.log(data);
+                    if (data) {
+                        $(".cart-qty").text(data + ' items')
+                    } else {
+                        $(".cart-qty").text('cart')
+                    }
                 }
-            }).done(function (msg) {
-                alert(msg);
-            })
+            });
         }
     </script>
 @endsection
+
+

@@ -43,10 +43,12 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
-                    <li class="nav-item">
+                    <li class="nav-item-count">
                         <a class="nav-link" href="{{ route('cart') }}">
                             <i class="material-icons">shopping_cart</i>
-                            @if(!empty(session()->get('cart'))) {{ count(session()->get('cart')) }} items @else Cart @endif
+                            <span class="cart-qty">
+                                    @if(!empty(session()->get('cart'))) {{ count(session()->get('cart')) }} items @else Cart @endif
+                            </span>
                         </a>
                     </li>
                     @guest

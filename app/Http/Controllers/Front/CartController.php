@@ -47,7 +47,7 @@ class CartController extends Controller
             ]);
         }
         session()->increment('cart.' . $productId . '.quantity');
-        return 'ok';
+        return count(session()->get('cart'));
     }
 
     /**
