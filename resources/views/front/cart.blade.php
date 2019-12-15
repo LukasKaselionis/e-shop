@@ -14,7 +14,7 @@
                                      alt="{{ $item['name'] }}">
                             @endif
                             <p>Quantity: {{ $item['quantity'] }}</p>
-                            <p>Price: {{ $item['price'] }}</p>
+                            <p>Price: {{ $item['price'] }} €</p>
                             <a href="{{ route('cart.item.destroy', $item['product_id']) }}">
                                 <button class="btn btn-outline-danger">decrease</button>
                             </a>

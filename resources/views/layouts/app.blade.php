@@ -23,10 +23,15 @@
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <header class="header">
+        <span class="header-information">ONLINE SHOPPING</span>
+    </header>
+    <nav id="navbar" class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
+                <i class="material-icons">
+                    home
+                </i>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -35,20 +40,16 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav mr-auto">
-
-                </ul>
-
                 <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto">
+                <ul class="navigation navbar-nav ml-auto">
                     <!-- Authentication Links -->
                     <li class="nav-item-count">
                         <a class="nav-link" href="{{ route('cart') }}">
                             <i class="material-icons">shopping_cart</i>
-                            <span class="cart-qty">
-                                    @if(!empty(session()->get('cart'))) {{ count(session()->get('cart')) }} items @else Cart @endif
-                            </span>
+                            <p class="cart-qty">
+                                @if(!empty(session()->get('cart'))) {{ count(session()->get('cart')) }} items @else
+                                    Cart @endif
+                            </p>
                         </a>
                     </li>
                     @guest
@@ -86,7 +87,7 @@
         </div>
     </nav>
 
-    <main class="py-4">
+    <main>
         @yield('content')
     </main>
 </div>

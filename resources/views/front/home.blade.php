@@ -2,25 +2,34 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
+        <ul class="product_list row">
             @foreach($products as $product)
-                <div class="card col-sm-4 col-md-3 col-lg-3 p-4 m-2">
-                    <h5>Product name: </h5>
-                    <p>{{ $product->name }}</p>
-                    @if ($product->cover)
-                        <img width="150" height="125" src="{{ asset('storage/'.$product->cover) }}"
-                             alt="{{ $product->title }}">
-                    @endif
-                    <h5>Price: </h5>
-                    <p>{{ $product->price }}</p>
-                    <h5>Description: </h5>
-                    <p>{{ $product->description }}</p>
-                    <a onclick="addToCart({{ $product->id }}, '{{ $product->name }}', {{ $product->price }}, '{{ $product->cover }}');">
-                        <button class="btn btn-success btn-block">Add</button>
-                    </a>
-                </div>
+                <li class="product col-xs-12 col-ms-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="product_container">
+                        <div class="product-img-container">
+                            @if ($product->cover)
+                                <img class="product_img" width="150" height="125"
+                                     src="{{ asset('storage/'.$product->cover) }}"
+                                     alt="{{ $product->title }}">
+                            @endif
+                        </div>
+                        <div class="product-name-container">
+                            <p>{{ $product->name }}</p>
+                        </div>
+                        <div class="product-price-container">
+                            <p>{{ $product->price }} €</p>
+                        </div>
+                        <div class="product-description-container">
+                            <h5>Description: </h5>
+                            <p>{{ $product->description }}</p>
+                        </div>
+                        <a onclick="addToCart({{ $product->id }}, '{{ $product->name }}', {{ $product->price }}, '{{ $product->cover }}');">
+                            <button class="button-add">Add</button>
+                        </a>
+                    </div>
+                </li>
             @endforeach
-        </div>
+        </ul>
     </div>
 @endsection
 

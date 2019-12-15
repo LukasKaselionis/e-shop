@@ -1,12 +1,92 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
-
 // Variables
 @import 'variables';
-
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
 body {
-  background-color: #857b26;
+  background-color: #f7f7f7;
+}
+
+.header {
+  background-color: darkkhaki;
+  height: 200px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-information {
+  text-decoration: none;
+  font-weight: 300;
+  font-size: 35px;
+
+}
+
+.navbar {
+  height: 65px;
+}
+
+
+.navbar-collapse.collapse.show {
+  background-color: #FFFFFF;
+  transition: top 0.3s;
+  z-index: 1;
+}
+
+.product_list {
+  list-style: none;
+  padding: 10px;
+}
+
+.product_container {
+  padding: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  background: #FFFFFF;
+  border: 1px solid #ececf6;
+}
+
+.product-img-container {
+  margin-bottom: 10px;
+}
+
+.product_img {
+  height: 195px;
+  width: 132px;
+}
+
+.material-icons {
+  line-height: 0 !important;
+}
+
+.cart-qty {
+  display: inline-block;
+  margin: 0;
+}
+
+.product-description-container {
+  display: none;
+}
+
+.button-add {
+  display: inline-block;
+  padding: 0.35em 1.2em;
+  border: 0.1em solid #FFFFFF;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  color: #FFFFFF;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.button-add:hover {
+  color: #000000;
+  background-color: #FFFFFF;
 }
