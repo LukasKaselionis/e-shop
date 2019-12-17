@@ -22,7 +22,7 @@ class CartController extends Controller
     public function cart(): View
     {
         $cart = session()->get('cart');
-        return view('front.cart', [
+        return view('shared.partialViews.cart', [
             'cart' => $cart
         ]);
     }

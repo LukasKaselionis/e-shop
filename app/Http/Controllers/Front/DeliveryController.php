@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Front;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class DeliveryController
@@ -15,6 +15,9 @@ class DeliveryController extends Controller
 {
     public function index()
     {
-        return view('front.checkout-delivery');
+        $user = Auth::user();
+        return view('front.checkout-delivery', [
+            'user' => $user
+        ]);
     }
 }

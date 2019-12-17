@@ -23,11 +23,11 @@ class HomeController extends Controller
     {
         $products = Product::query()
             ->orderByDesc('created_at')
-            ->get();
+            ->paginate();
 
         Session::put('products', $products);
 
-        return view('front.home', [
+        return view('shared.partialViews.home', [
             'products' => $products
         ]);
     }
