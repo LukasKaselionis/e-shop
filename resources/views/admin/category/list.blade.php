@@ -1,13 +1,15 @@
-@extends('layouts.admin')
+@extends('shared.layouts.admin')
 
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
+                <div class="d-flex justify-content-end pb-2">
+                    <a href="{{ route('admin.category.create') }}" class="btn btn-lg btn-outline-primary">Add</a>
+                </div>
                 <div class="card">
                     <div class="card-header">
                         {{ __('Categories') }}
-                        <a href="{{ route('admin.category.create') }}" class="btn btn-sm btn-primary">+</a>
                     </div>
                     <div class="card-body">
                         @if (session('status'))

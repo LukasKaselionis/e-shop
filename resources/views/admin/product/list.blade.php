@@ -1,13 +1,15 @@
-@extends('layouts.admin')
+@extends('shared.layouts.admin')
 
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
+                <div class="d-flex justify-content-end pb-2">
+                    <a href="{{ route('admin.product.create') }}" class="btn btn-lg btn-outline-primary">Add</a>
+                </div>
                 <div class="card">
                     <div class="card-header">
                         {{ __('Products') }}
-                        <a href="{{ route('admin.product.create') }}" class="btn btn-sm btn-primary">+</a>
                     </div>
 
                     <div class="card-body">
@@ -44,16 +46,16 @@
                                     <td>{{ $product->description }}</td>
                                     <td>{{ $product->created_at }}</td>
                                     <td>{{ $product->updated_at }}</td>
-                                    <td>
-                                        <a class="btn btn-sm btn-outline-primary" href="{{
+                                    <td class="d-flex flex-row">
+                                        <a class="btn btn-sm btn-outline-primary mr-1" href="{{
                                         route('admin.product.edit', ['product' => $product->id])
                                         }}">
                                             Edit
                                         </a>
-                                        <a class="btn btn-sm btn-outline-success"
+                                        <a class="btn btn-sm btn-outline-success mr-1"
                                            href="{{ route('admin.product.show', ['product' => $product->id]) }}">Show</a>
 
-                                        <form class="d-inline"
+                                        <form
                                               action="{{ route('admin.product.destroy', ['product' => $product->id]) }}"
                                               method="post">
                                             @csrf

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('shared.layouts.admin')
 
 @section('content')
     <div class="container">
@@ -13,4 +13,15 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                $(".alert").alert('close');
+            }, 3000);
+        });
+    </script>
 @endsection
