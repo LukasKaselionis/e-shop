@@ -1,0 +1,54 @@
+// Product scss
+
+.card_list {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  padding: 10px;
+}
+
+.card_container {
+  padding: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  background: #FFFFFF;
+  border: 1px solid #ececf6;
+}
+
+.card-img-container {
+  margin-bottom: 10px;
+}
+
+.card_img {
+  height: 170px;
+  width: 132px;
+}
+
+.card-description-container {
+  display: none;
+}
+
+.card-button {
+  display: inline-block;
+  padding: 0.35em 1.2em;
+  border: 0.1em solid #FFFFFF;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  color: #FFFFFF;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.button-add:hover {
+  color: #000000;
+  background-color: #e5e5e5;
+}
+
+.card-paginate {
+  justify-content: center;
+  display: flex;
+}
