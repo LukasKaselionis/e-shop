@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Services;
 
 use App\Admin;
+use App\Http\Middleware\RouteAccessMiddleware;
 use App\Role;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Routing\Route as RoutingRoute;
@@ -20,7 +21,7 @@ class RouteAccessManagerService
         $routes = collect(Route::getRoutes());
 
         return $routes->filter(function(RoutingRoute $route) {
-            return in_array('auth:admin', $route->gatherMiddleware());
+            return in_array(RouteAccessMiddleware::ALIAS, $route->gatherMiddleware());
         })->map(function(RoutingRoute $route) {
             return $route->getName();
         })->toArray();

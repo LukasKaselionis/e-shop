@@ -22,13 +22,17 @@
                         <a class="nav-link" href="{{ route('admin.login') }}">{{ __('Login') }}</a>
                     </li>
                 @else
-                    @if (can_access_any(['admin.administrator.index', 'admin.role.index']))
+                    @if (can_access('admin.category.index'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.category.index') }}">{{ __('Categories') }}</a>
                         </li>
+                    @endif
+                    @if(can_access('admin.product.index'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.product.index') }}">{{ __('Products') }}</a>
                         </li>
+                    @endif
+                    @if (can_access_any(['admin.administrator.index', 'admin.role.index']))
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

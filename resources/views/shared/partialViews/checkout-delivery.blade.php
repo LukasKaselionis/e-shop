@@ -28,8 +28,13 @@
                 <label for="cash">Cash</label>
             </div>
             <div class="form-group">
-                <p>Shipping</p>
+                <p>Ship to</p>
             </div>
+            <div class="form-group">
+                <input class="btn btn-outline-success" type="submit" name="submit"
+                       value="{{ __('Confirm') }}">
+            </div>
+
         </form>
     </div>
 @endsection

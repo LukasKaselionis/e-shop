@@ -14,7 +14,7 @@ function can_access(string $routeName): bool {
     /** @var RouteAccessManagerService $manager */
     $manager = app(RouteAccessManagerService::class);
 
-    return $manager->accessAllowed(Auth::user(), $routeName);
+    return $manager->accessAllowed(Auth::guard('admin')->user(), $routeName);
 }
 
 /**
@@ -25,7 +25,7 @@ function can_access(string $routeName): bool {
 function can_access_any(array $routeNamesArray): bool {
     /** @var RouteAccessManagerService $manager */
     $manager = app(RouteAccessManagerService::class);
-    $user = Auth::user();
+    $user = Auth::guard('admin')->user();
 
     foreach ($routeNamesArray as $routeName) {
         if ($manager->accessAllowed($user, $routeName)) {

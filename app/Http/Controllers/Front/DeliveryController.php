@@ -16,7 +16,7 @@ class DeliveryController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('front.checkout-delivery', [
+        return view('shared.partialViews.checkout-delivery', [
             'user' => $user
         ]);
     }

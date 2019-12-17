@@ -54,9 +54,9 @@ class RouteAccessMiddleware
      * @return bool
      */
     private function shouldBlockAccess(): bool {
-        return Auth::check() &&
+        return Auth::guard('admin')->check() &&
             !$this->routeAccessManagerService->accessAllowed(
-                Auth::user(),
+                Auth::guard('admin')->user(),
                 (string)Arr::get(Route::current()->action, 'as')
             );
     }

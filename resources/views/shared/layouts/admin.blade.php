@@ -18,8 +18,9 @@
 </head>
 <body>
 <div id="app">
-    @include('components.admin_navbar')
-
+    @auth('admin')
+        @include('components.admin_navbar')
+    @endauth
     <main class="py-4">
         @yield('content')
     </main>
