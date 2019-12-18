@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
@@ -24,11 +24,14 @@ class RoleController extends Controller
      *
      * @param RouteAccessManagerService $routeAccessManagerService
      */
-    public function __construct(RouteAccessManagerService $routeAccessManagerService) {
+    public function __construct(RouteAccessManagerService $routeAccessManagerService)
+    {
+        parent::__construct();
         $this->routeAccessManagerService = $routeAccessManagerService;
     }
 
-    public function index(): View {
+    public function index(): View
+    {
         $roles = Role::query()->paginate();
 
         return view('admin.role.list', [
@@ -36,7 +39,8 @@ class RoleController extends Controller
         ]);
     }
 
-    public function edit(Role $role): View {
+    public function edit(Role $role): View
+    {
         $filteredRoutes = $this->routeAccessManagerService->getManagementRoutes();
 
         return view('admin.role.edit', [
@@ -52,7 +56,8 @@ class RoleController extends Controller
      * @return RedirectResponse
      * @throws ValidationException
      */
-    public function update(Request $request, Role $role): RedirectResponse {
+    public function update(Request $request, Role $role): RedirectResponse
+    {
 
         $this->validate($request, [
             'name' => 'required|min:6',

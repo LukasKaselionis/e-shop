@@ -14,7 +14,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
         $this->app->singleton(RouteAccessManagerService::class);
     }
 
@@ -28,7 +27,8 @@ class AppServiceProvider extends ServiceProvider
         $this->loadHelpers();
     }
 
-    private function loadHelpers() {
+    private function loadHelpers()
+    {
         include_once __DIR__ . '/../../helpers/route_access.php';
     }
 }

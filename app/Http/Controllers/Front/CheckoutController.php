@@ -11,13 +11,15 @@ use Illuminate\Support\Facades\Auth;
  * Class DeliveryController
  * @package App\Http\Controllers\Front
  */
-class DeliveryController extends Controller
+class CheckoutController extends Controller
 {
     public function index()
     {
         $user = Auth::user();
-        return view('shared.partialViews.checkout-delivery', [
-            'user' => $user
+        $cart = session()->get('cart');
+        return view('shared.partialViews.checkout', [
+            'user' => $user,
+            'cart' => $cart
         ]);
     }
 }
