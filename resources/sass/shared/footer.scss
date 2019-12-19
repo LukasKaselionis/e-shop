@@ -2,6 +2,7 @@
 
 .footer {
   background-color: #1b1e21;
+  color: rgba(255, 255, 255, 0.51);
   height: 140px;
   display: flex;
   text-align: center;
@@ -9,3 +10,28 @@
   align-items: center;
 }
 
+
+.footer.icons {
+  color: #FFFFFF !important;
+}
+
+.footer-information {
+  font-style: italic;
+  color: #f7f7f7;
+  opacity: 0.7;
+  padding: 0 10px 0 10px;
+}
+
+.extra-content {
+  background: #000;
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.extra-link {
+  text-decoration: none;
+  text-align: center;
+  color: #f7f7f7;
+}
