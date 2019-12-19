@@ -22,13 +22,15 @@ Route::post('cart/add', 'Front\CartController@add')->name('cart.add');
 Route::get('cart', 'Front\CartController@cart')->name('cart');
 Route::get('cart/{id}', 'Front\CartController@destroy')->name('cart.item.destroy');
 
+Route::get('products/{slug}', 'Front\CategoryController@products')->name('products.category');
+
 Auth::routes();
 
 Route::get('/home', 'Front\HomeController@index')->name('home');
 
 // USER ROUTES
 Route::middleware('auth')->group(function () {
-    Route::get('/checkout/delivery', 'Front\DeliveryController@index')->name('checkout.delivery');
+    Route::get('/checkout', 'Front\CheckoutController@index')->name('checkout.delivery');
 });
 
 // ADMIN ROUTES

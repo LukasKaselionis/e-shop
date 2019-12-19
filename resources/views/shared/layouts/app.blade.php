@@ -35,6 +35,6 @@
     @component('components.footer')
     @endcomponent
 </div>
-@yield('scripts')
 </body>
+    @stack('scripts')
 </html>

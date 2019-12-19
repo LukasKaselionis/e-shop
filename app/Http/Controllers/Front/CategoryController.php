@@ -26,9 +26,9 @@ class CategoryController extends Controller
                 $query->where('slug', '=', $slug);
             })
             ->orderByDesc('created_at')
-            ->get();
+            ->paginate();
 
-        return view('shared.partialViews.products_list', [
+        return view('shared.partialViews.category_list', [
             'products' => $products,
         ]);
     }

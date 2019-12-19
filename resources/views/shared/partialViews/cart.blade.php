@@ -1,21 +1,24 @@
 @extends('shared.layouts.app')
 
 @section('content')
-    <div class="row">
+    <div class="breadcrumb justify-content-center">
+        Shopping cart
+    </div>
+    <div class="card_list row text-center">
         @if(!empty($cart))
             @foreach($cart as $item)
                 @if($item['quantity'] > 0)
-                    <div class="card col-sm-4 col-md-3 p-4 m-2">
+                    <div class="card col-md-3 p-2">
                         <h5>Product name: </h5>
                         <p>{{$item['name']}}</p>
                         @if ($item['cover'])
-                            <img width="150" height="100" src="{{ asset('storage/'.$item['cover']) }}"
+                            <img width="130" height="150" src="{{ asset('storage/'.$item['cover']) }}"
                                  alt="{{ $item['name'] }}">
                         @endif
                         <p>Quantity: {{ $item['quantity'] }}</p>
                         <p>Price: {{ $item['price'] }} €</p>
                         <a href="{{ route('cart.item.destroy', $item['product_id']) }}">
-                            <button class="btn btn-outline-danger">Remove</button>
+                            <button class="btn btn-danger">Remove</button>
                         </a>
                     </div>
                 @endif
@@ -24,7 +27,7 @@
     <div class="text-center">
         <div>
             <a href="{{ route('home') }}">
-                <button class="btn btn-outline-info m-2">< Choose more products</button>
+                <button class="btn btn-info m-2">< Choose more products</button>
             </a>
         </div>
         @guest
@@ -47,7 +50,7 @@
                 <p>Cart is empty</p>
                 <div>
                     <a href="{{ route('home') }}">
-                        <button class="btn btn-outline-info">< Choose more products</button>
+                        <button class="btn btn-info">< Choose more products</button>
                     </a>
                 </div>
             </div>

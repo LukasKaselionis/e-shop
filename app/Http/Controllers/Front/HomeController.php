@@ -1,12 +1,12 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Product;
-use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 use Illuminate\View\View;
 
 /**
@@ -21,11 +21,12 @@ class HomeController extends Controller
      */
     public function index(): View
     {
+        $productCount = env('NEWEST_PRODUCTS_INDEX_LIMIT', 20);
+        $dateBefore = Carbon::now()->subDays($productCount);
         $products = Product::query()
             ->orderByDesc('created_at')
-            ->paginate();
-
-        Session::put('products', $products);
+            ->where('created_at','>', $dateBefore)
+            ->paginate(10);
 
         return view('shared.partialViews.home', [
             'products' => $products

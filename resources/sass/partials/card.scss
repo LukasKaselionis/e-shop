@@ -39,13 +39,16 @@
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
   color: #FFFFFF;
+  background-color: #1f6fb2;
   text-align: center;
   transition: all 0.2s;
 }
 
-.button-add:hover {
-  color: #000000;
-  background-color: #e5e5e5;
+.card-button:hover {
+  color: #FFFFFF;
+  background-color: #2898f7;
+  border: 0.1em solid #b3d7f5;
+  transition: 0.3s ease-in-out;
 }
 
 .card-paginate {

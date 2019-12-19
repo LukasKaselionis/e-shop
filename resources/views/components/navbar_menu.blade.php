@@ -1,18 +1,26 @@
-<nav class="navbar-menu navbar-expand-md navbar-light bg-white shadow-sm" onscroll="showNavigationMenu()">
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
-        <!-- Left Side of Navbar -->
+        <a class="navbar-brand" href="{{ url('/') }}">
+            <i class="icon home material-icons">
+                home
+            </i>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="{{ __('Toggle navigation') }}">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <a class="nav-link" href="{{ url('/') }}">
-                <i class="icon home material-icons">
-                    home
-                </i>
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <!-- Left Side of Navbar -->
+            <ul class="navigation navbar-nav mr-auto">
+                    @foreach($categories as $item)
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               href="{{ route('products.category', ['slug' => $item->slug]) }}">{{ $item->title }}</a>
+                        </li>
+                    @endforeach
+            </ul>
             <!-- Right Side Of Navbar -->
             <ul class="navigation navbar-nav ml-auto">
                 <!-- Authentication Links -->
