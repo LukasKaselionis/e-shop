@@ -8,7 +8,7 @@
         @if(!empty($cart))
             @foreach($cart as $item)
                 @if($item['quantity'] > 0)
-                    <div class="card col-md-3 p-2">
+                    <div class="card col-md-3 p-2 shadow-sm">
                         <h5>Product name: </h5>
                         <p>{{$item['name']}}</p>
                         @if ($item['cover'])
