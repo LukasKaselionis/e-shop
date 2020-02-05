@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 // GUEST ROUTES
 
 Route::get('/', 'Front\HomeController@index')->name('home');
+Route::get('/home', 'Front\HomeController@index')->name('home');
 Route::post('cart/add', 'Front\CartController@add')->name('cart.add');
 Route::get('cart', 'Front\CartController@cart')->name('cart');
 Route::get('cart/{id}', 'Front\CartController@destroy')->name('cart.item.destroy');
@@ -28,7 +29,8 @@ Auth::routes();
 
 // USER ROUTES
 Route::middleware('auth')->group(function () {
-    Route::get('/checkout', 'Front\CheckoutController@index')->name('checkout.delivery');
+    Route::get('/checkout', 'Front\CheckoutController@getCheckout')->name('checkout.index');
+    Route::post('/checkout/order', 'Front\CheckoutController@placeOrder')->name('checkout.place.order');
 });
 
 // ADMIN ROUTES
