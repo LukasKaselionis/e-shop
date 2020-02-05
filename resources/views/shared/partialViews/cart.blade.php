@@ -40,8 +40,8 @@
             </a>
         @endguest
         @Auth
-            <a href="{{ route('checkout.delivery') }}">
-                <button class="btn btn-outline-success">Continue</button>
+            <a href="{{ route('checkout.index') }}">
+                <button class="btn btn-outline-success">Proceed To Checkout</button>
             </a>
         @endauth
         @else
