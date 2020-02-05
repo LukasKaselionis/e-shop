@@ -26,8 +26,6 @@ Route::get('products/{slug}', 'Front\CategoryController@products')->name('produc
 
 Auth::routes();
 
-Route::get('/home', 'Front\HomeController@index')->name('home');
-
 // USER ROUTES
 Route::middleware('auth')->group(function () {
     Route::get('/checkout', 'Front\CheckoutController@index')->name('checkout.delivery');

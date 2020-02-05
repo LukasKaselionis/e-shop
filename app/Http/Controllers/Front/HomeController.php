@@ -21,12 +21,9 @@ class HomeController extends Controller
      */
     public function index(): View
     {
-        $productCount = env('NEWEST_PRODUCTS_INDEX_LIMIT', 20);
-        $dateBefore = Carbon::now()->subDays($productCount);
         $products = Product::query()
             ->orderByDesc('created_at')
-            ->where('created_at','>', $dateBefore)
-            ->paginate(10);
+            ->paginate();
 
         return view('shared.partialViews.home', [
             'products' => $products

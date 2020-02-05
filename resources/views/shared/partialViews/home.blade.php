@@ -5,6 +5,7 @@
         All products
     </div>
     @include('shared.partialViews.product_list', ['products' => $products])
+    @include('components.paginate', ['data' => $products])
 
 @endsection
 
